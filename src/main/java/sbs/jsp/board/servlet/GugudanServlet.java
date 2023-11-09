@@ -23,5 +23,9 @@ public class GugudanServlet extends HttpServlet {
     for(int i = 1; i <= limit; i++) {
       rq.appendBody("<div>%d * %d = %d</div>\n".formatted(dan, i, dan * i));
     }
+
+    rq.appendBody("<div class=\"a\"></div>");
+    rq.appendBody("<style>.a {width: 200px; height: 200px; background-color: red;}</style>");
+
   }
 }
