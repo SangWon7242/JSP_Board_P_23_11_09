@@ -470,3 +470,48 @@
 09-Nov-2023 21:20:54.382 정보 [Thread-1] org.apache.catalina.core.StandardService.stopInternal 서비스 [Catalina]을(를) 중지시킵니다.
 09-Nov-2023 21:20:54.388 정보 [Thread-1] org.apache.coyote.AbstractProtocol.stop 프로토콜 핸들러 ["http-nio-8081"]을(를) 중지시킵니다.
 09-Nov-2023 21:20:54.390 정보 [Thread-1] org.apache.coyote.AbstractProtocol.destroy 프로토콜 핸들러 ["http-nio-8081"]을(를) 소멸시킵니다.
+09-Nov-2023 21:20:56.119 정보 [main] org.apache.catalina.startup.VersionLoggerListener.log 서버 버전 이름:    Apache Tomcat/10.1.15
+09-Nov-2023 21:20:56.123 정보 [main] org.apache.catalina.startup.VersionLoggerListener.log Server 빌드 시각:  Oct 11 2023 23:38:40 UTC
+09-Nov-2023 21:20:56.123 정보 [main] org.apache.catalina.startup.VersionLoggerListener.log Server 버전 번호:  10.1.15.0
+09-Nov-2023 21:20:56.123 정보 [main] org.apache.catalina.startup.VersionLoggerListener.log 운영체제 이름:     Windows 10
+09-Nov-2023 21:20:56.123 정보 [main] org.apache.catalina.startup.VersionLoggerListener.log 운영체제 버전:     10.0
+09-Nov-2023 21:20:56.123 정보 [main] org.apache.catalina.startup.VersionLoggerListener.log 아키텍처:          amd64
+09-Nov-2023 21:20:56.123 정보 [main] org.apache.catalina.startup.VersionLoggerListener.log 자바 홈:           C:\Users\User\.jdks\corretto-17.0.8.1
+09-Nov-2023 21:20:56.123 정보 [main] org.apache.catalina.startup.VersionLoggerListener.log JVM 버전:          17.0.8.1+8-LTS
+09-Nov-2023 21:20:56.123 정보 [main] org.apache.catalina.startup.VersionLoggerListener.log JVM 벤더:          Amazon.com Inc.
+09-Nov-2023 21:20:56.123 정보 [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:     C:\works\jsp_projects\JSP_Board
+09-Nov-2023 21:20:56.124 정보 [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:     C:\works\apache-tomcat-10.1.15
+09-Nov-2023 21:20:56.141 정보 [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  --add-opens=java.base/java.lang=ALL-UNNAMED
+09-Nov-2023 21:20:56.142 정보 [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  --add-opens=java.base/java.io=ALL-UNNAMED
+09-Nov-2023 21:20:56.142 정보 [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  --add-opens=java.base/java.util=ALL-UNNAMED
+09-Nov-2023 21:20:56.142 정보 [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  --add-opens=java.base/java.util.concurrent=ALL-UNNAMED
+09-Nov-2023 21:20:56.142 정보 [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+09-Nov-2023 21:20:56.142 정보 [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Dcatalina.home=C:\works\apache-tomcat-10.1.15
+09-Nov-2023 21:20:56.142 정보 [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Dcatalina.base=C:\works\jsp_projects\JSP_Board
+09-Nov-2023 21:20:56.142 정보 [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Djava.io.tmpdir=C:\works\jsp_projects\JSP_Board\temp
+09-Nov-2023 21:20:56.142 정보 [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Djava.util.logging.config.file=C:\works\jsp_projects\JSP_Board\conf\logging.properties
+09-Nov-2023 21:20:56.142 정보 [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+09-Nov-2023 21:20:56.142 정보 [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -javaagent:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2023.2\lib\idea_rt.jar=1495:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2023.2\bin
+09-Nov-2023 21:20:56.142 정보 [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Dfile.encoding=UTF-8
+09-Nov-2023 21:20:56.146 정보 [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent APR 버전 [1.7.4]을(를) 사용한, APR 기반 Apache Tomcat Native 라이브러리 [2.0.6]을(를) 로드했습니다.
+09-Nov-2023 21:20:56.152 정보 [main] org.apache.catalina.core.AprLifecycleListener.initializeSSL OpenSSL이 성공적으로 초기화되었습니다: [OpenSSL 3.0.11 19 Sep 2023]
+09-Nov-2023 21:20:56.322 정보 [main] org.apache.coyote.AbstractProtocol.init 프로토콜 핸들러 ["http-nio-8081"]을(를) 초기화합니다.
+09-Nov-2023 21:20:56.341 정보 [main] org.apache.catalina.startup.Catalina.load [357] 밀리초 내에 서버가 초기화되었습니다.
+09-Nov-2023 21:20:56.395 정보 [main] org.apache.catalina.core.StandardService.startInternal 서비스 [Catalina]을(를) 시작합니다.
+09-Nov-2023 21:20:56.395 정보 [main] org.apache.catalina.core.StandardEngine.startInternal 서버 엔진을 시작합니다: [Apache Tomcat/10.1.15]
+09-Nov-2023 21:20:56.412 정보 [main] org.apache.catalina.startup.HostConfig.deployDescriptor 배치 descriptor [C:\works\jsp_projects\JSP_Board\conf\Catalina\localhost\ROOT.xml]을(를) 배치합니다.
+09-Nov-2023 21:20:56.773 정보 [main] org.apache.catalina.startup.HostConfig.deployDescriptor 배치 descriptor [C:\works\jsp_projects\JSP_Board\conf\Catalina\localhost\ROOT.xml]의 배치가 [359] 밀리초 내에 완료되었습니다.
+09-Nov-2023 21:20:56.775 정보 [main] org.apache.coyote.AbstractProtocol.start 프로토콜 핸들러 ["http-nio-8081"]을(를) 시작합니다.
+09-Nov-2023 21:20:56.811 정보 [main] org.apache.catalina.startup.Catalina.start 서버가 [466] 밀리초 내에 시작되었습니다.
+09-Nov-2023 21:22:26.850 정보 [Catalina-utility-2] org.apache.catalina.core.StandardContext.reload 이름이 []인 컨텍스트를 다시 로드하는 작업이 시작되었습니다.
+09-Nov-2023 21:22:26.870 정보 [Catalina-utility-2] org.apache.catalina.core.StandardContext.reload 이름이 []인 컨텍스트를 다시 로드하는 것을 완료했습니다.
+09-Nov-2023 21:22:56.900 정보 [Catalina-utility-2] org.apache.catalina.core.StandardContext.reload 이름이 []인 컨텍스트를 다시 로드하는 작업이 시작되었습니다.
+09-Nov-2023 21:22:56.918 정보 [Catalina-utility-2] org.apache.catalina.core.StandardContext.reload 이름이 []인 컨텍스트를 다시 로드하는 것을 완료했습니다.
+09-Nov-2023 21:28:07.220 정보 [Catalina-utility-1] org.apache.catalina.core.StandardContext.reload 이름이 []인 컨텍스트를 다시 로드하는 작업이 시작되었습니다.
+09-Nov-2023 21:28:07.236 정보 [Catalina-utility-1] org.apache.catalina.core.StandardContext.reload 이름이 []인 컨텍스트를 다시 로드하는 것을 완료했습니다.
+09-Nov-2023 21:28:27.254 정보 [Catalina-utility-1] org.apache.catalina.core.StandardContext.reload 이름이 []인 컨텍스트를 다시 로드하는 작업이 시작되었습니다.
+09-Nov-2023 21:28:27.268 정보 [Catalina-utility-1] org.apache.catalina.core.StandardContext.reload 이름이 []인 컨텍스트를 다시 로드하는 것을 완료했습니다.
+09-Nov-2023 21:32:09.879 정보 [Thread-1] org.apache.coyote.AbstractProtocol.pause 프로토콜 핸들러 ["http-nio-8081"]을(를) 일시 정지 중
+09-Nov-2023 21:32:09.882 정보 [Thread-1] org.apache.catalina.core.StandardService.stopInternal 서비스 [Catalina]을(를) 중지시킵니다.
+09-Nov-2023 21:32:09.884 정보 [Thread-1] org.apache.coyote.AbstractProtocol.stop 프로토콜 핸들러 ["http-nio-8081"]을(를) 중지시킵니다.
+09-Nov-2023 21:32:09.887 정보 [Thread-1] org.apache.coyote.AbstractProtocol.destroy 프로토콜 핸들러 ["http-nio-8081"]을(를) 소멸시킵니다.
