@@ -3,8 +3,8 @@
 
 <%
   Rq rq = new Rq(request, response);
-  int dan = rq.getIntParam("dan", 9);
-  int limit = rq.getIntParam("limit", 9);
+  int dan = (int)request.getAttribute("dan");
+  int limit = (int)request.getAttribute("limit");
 %>
 
 <h1><%=dan%>단</h1>

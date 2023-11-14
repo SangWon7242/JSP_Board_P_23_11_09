@@ -55,4 +55,12 @@ public class Rq {
       throw new RuntimeException(e);
     }
   }
+
+  public void getAttr(String name) {
+    req.getAttribute(name);
+  }
+
+  public void setAttr(String name, Object value) {
+    req.setAttribute(name, value);
+  }
 }
