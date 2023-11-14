@@ -56,8 +56,8 @@ public class Rq {
     }
   }
 
-  public void getAttr(String name) {
-    req.getAttribute(name);
+  public Object getAttr(String name) {
+    return req.getAttribute(name);
   }
 
   public void setAttr(String name, Object value) {
