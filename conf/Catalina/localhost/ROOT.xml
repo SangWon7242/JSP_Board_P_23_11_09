@@ -2,5 +2,7 @@
 <Context docBase="C:\works\jsp_projects\JSP_Board\src\webapp">
   <Resources cacheMaxSize="10240">
     <PreResources base="C:/works/jsp_projects/JSP_Board/target/classes" className="org.apache.catalina.webresources.DirResourceSet" webAppMount="/WEB-INF/classes"/>
+    <PostResources base="C:/Users/User/.m2/repository/mysql/mysql-connector-java/8.0.22/mysql-connector-java-8.0.22.jar" className="org.apache.catalina.webresources.FileResourceSet" webAppMount="/WEB-INF/lib/mysql-connector-java-8.0.22.jar"/>
+    <PostResources base="C:/Users/User/.m2/repository/com/google/protobuf/protobuf-java/3.11.4/protobuf-java-3.11.4.jar" className="org.apache.catalina.webresources.FileResourceSet" webAppMount="/WEB-INF/lib/protobuf-java-3.11.4.jar"/>
   </Resources>
 </Context>
