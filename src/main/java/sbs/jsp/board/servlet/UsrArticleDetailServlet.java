@@ -55,5 +55,11 @@ public class UsrArticleDetailServlet extends HttpServlet {
     RequestDispatcher requestDispatcher = req.getRequestDispatcher("/article/detail.jsp");
     requestDispatcher.forward(req, resp);
 
+    MysqlUtil.closeConnection();
+  }
+
+  @Override
+  protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    doGet(req, resp);
   }
 }

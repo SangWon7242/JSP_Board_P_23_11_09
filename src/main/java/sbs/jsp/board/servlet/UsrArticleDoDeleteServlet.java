@@ -60,5 +60,12 @@ public class UsrArticleDoDeleteServlet extends HttpServlet {
           location.replace('list');
         </script>
         """.formatted(id));
+
+    MysqlUtil.closeConnection();
+  }
+
+  @Override
+  protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    doGet(req, resp);
   }
 }
