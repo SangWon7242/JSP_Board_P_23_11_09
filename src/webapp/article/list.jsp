@@ -63,6 +63,9 @@
         <% } %>
         </tbody>
       </table>
+      <div class="btn-group">
+        <a href="write">게시물 작성</a>
+      </div>
     </div>
   </section>
 
