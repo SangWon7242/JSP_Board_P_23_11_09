@@ -33,8 +33,7 @@ public class UsrArticleListServlet extends HttpServlet {
 
     rq.setAttr("articleListMap", articleListMap);
 
-    RequestDispatcher requestDispatcher = req.getRequestDispatcher("/article/list.jsp");
-    requestDispatcher.forward(req, resp);
+    rq.jsp("article/list");
 
     MysqlUtil.closeConnection();
   }
