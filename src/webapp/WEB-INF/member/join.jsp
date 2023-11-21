@@ -87,11 +87,11 @@ Rq rq = new Rq(request, response);
     <h1>회원가입</h1>
 
     <form action="doJoin" method="POST" onsubmit="JoinForm_submit(this); return false;">
-      <div>로그인 아이디 : <input autocomplete="off" placeholder="아이디를 입력해주세요." name="loginId" type="text"></div>
-      <div>로그인 패스워드 : <input autocomplete="off" placeholder="비밀번호를 입력해주세요." name="loginPw" type="password"></div>
-      <div>로그인 패스워드 확인 : <input autocomplete="off" placeholder="비밀번호를 확인을 입력해주세요." name="loginPwConfirm" type="password"></div>
-      <div>이름 : <input autocomplete="off" placeholder="이름을 입력해주세요." name="name" type="text"></div>
-      <div>이메일 : <input autocomplete="off" placeholder="이메일은 입력해주세요." name="email" type="email"></div>
+      <div>로그인 아이디 : <input placeholder="아이디를 입력해주세요." name="loginId" type="text"></div>
+      <div>로그인 패스워드 : <input placeholder="비밀번호를 입력해주세요." name="loginPw" type="password"></div>
+      <div>로그인 패스워드 확인 : <input placeholder="비밀번호를 확인을 입력해주세요." name="loginPwConfirm" type="password"></div>
+      <div>이름 : <input placeholder="이름을 입력해주세요." name="name" type="text"></div>
+      <div>이메일 : <input placeholder="이메일은 입력해주세요." name="email" type="email"></div>
       <div class="btn-group">
         <button type="submit">회원가입</button>
         <button type="button">

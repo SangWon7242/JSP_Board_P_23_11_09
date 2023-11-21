@@ -26,6 +26,38 @@ public class UsrMemberDoJoinServlet extends HttpServlet {
     String email = rq.getParam("email", "");
 
     SecSql sql = new SecSql();
+    sql.append("SELECT COUNT(*) AS cnt");
+    sql.append("FROM `member`");
+    sql.append("WHERE loginId = ?", loginId);
+
+    boolean isJoinAvailableLoginId = MysqlUtil.selectRowIntValue(sql) == 0;
+
+    if(isJoinAvailableLoginId == false) {
+      rq.appendBody("""
+          <script>
+            alert('%s(은)는 중복 된 로그인 아이디입니다.');
+            history.back();
+          </script>
+          """.formatted(loginId));
+    }
+
+    sql = new SecSql();
+    sql.append("SELECT COUNT(*) AS cnt");
+    sql.append("FROM `member`");
+    sql.append("WHERE email = ?", email);
+
+    boolean isJoinAvailableEmail = MysqlUtil.selectRowIntValue(sql) == 0;
+
+    if(isJoinAvailableEmail == false) {
+      rq.appendBody("""
+          <script>
+            alert('%s(은)는 중복 된 이메일입니다.');
+            history.back();
+          </script>
+          """.formatted(email));
+    }
+
+    sql = new SecSql();
     sql.append("INSERT INTO `member`");
     sql.append("SET regDate = NOW()");
     sql.append(", updateDate = NOW()");

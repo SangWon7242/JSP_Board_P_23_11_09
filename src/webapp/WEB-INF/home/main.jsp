@@ -16,7 +16,20 @@ Rq rq = new Rq(request, response);
   <title>메인페지이</title>
 </head>
 <body>
-  <h1>메인페이지입니다.</h1>
+  <style>
+    body, ul, li {
+      margin: 0;
+      padding: 0;
+      list-style : none;
+  </style>
 
+  <h1>메인페이지입니다.</h1>
+  <nav class="menu-box-1">
+    <ul style="display:flex; gap: 0 10px">
+      <li><a href="/usr/article/list">게시물 리스트</a></li>
+      <li><a href="/usr/member/join">회원가입</a></li>
+      <li><a href="/usr/member/login">로그인</a></li>
+    </ul>
+  </nav>
 </body>
 </html>
