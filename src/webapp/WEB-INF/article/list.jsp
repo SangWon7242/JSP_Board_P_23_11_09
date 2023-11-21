@@ -74,8 +74,27 @@
       </div>
 
       <div class="page" style="display:flex; justify-content: center; gap: 0 10px;">
-        <% for(int i = 1; i <= totalPage; i++) {%>
+        <% if(cPage > 1) { %>
+          <a href="list?page=1">◀</a>
+        <% } %>
+        <%
+        int pageMenuSize = 5;
+        int from = cPage - pageMenuSize;
+
+        if(from < 1) {
+          from = 1;
+        }
+
+        int end = cPage + 10;
+        if(end > totalPage) {
+          end = totalPage;
+        }
+
+        for(int i = from; i <= end; i++) {%>
           <a class="<%= cPage == i ? "red" : "" %>" href="list?page=<%=i%>"><%=i%></a>
+        <% } %>
+        <% if(cPage < totalPage) { %>
+          <a href="list?page=<%=totalPage%>">▶</a>
         <% } %>
       </div>
     </div>
