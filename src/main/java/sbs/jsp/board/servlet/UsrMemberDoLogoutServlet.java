@@ -7,28 +7,30 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import sbs.jsp.board.Rq;
+import sbs.jsp.board.util.MysqlUtil;
+import sbs.jsp.board.util.SecSql;
 
 import java.io.IOException;
+import java.util.Map;
 
-@WebServlet("/home/main")
-public class HomeMainServlet extends HttpServlet {
+@WebServlet("/usr/member/doLogout")
+public class UsrMemberDoLogoutServlet extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    MysqlUtil.setDBInfo("localhost", "sbsst", "sbs123414", "jspboard");
+    MysqlUtil.setDevMode(true);
+
     Rq rq = new Rq(req, resp);
 
     HttpSession session = req.getSession();
+    session.removeAttribute("loginedMemberId");
 
-    boolean isLogined = false;
-    int loginedMemberId = -1;
-    if(session.getAttribute("loginedMemberId") != null) {
-      loginedMemberId = (int) session.getAttribute("loginedMemberId");
-      isLogined = true;
-    }
-
-    rq.setAttr("isLogined", isLogined); // 로그인 여부
-    rq.setAttr("loginedMemberId", loginedMemberId);
-
-    rq.jsp("home/main");
+    rq.appendBody("""
+          <script>
+            alert('로그아웃 되었습니다.');
+            location.replace('/home/main');
+          </script>
+          """);
   }
 
   @Override
