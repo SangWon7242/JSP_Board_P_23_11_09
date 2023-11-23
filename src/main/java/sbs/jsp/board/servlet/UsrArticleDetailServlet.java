@@ -44,9 +44,12 @@ public class UsrArticleDetailServlet extends HttpServlet {
     }
 
     sql = new SecSql();
-    sql.append("SELECT A.*");
+    sql.append("SELECT A.*, M.name AS writerName");
     sql.append("FROM article AS A");
+    sql.append("INNER JOIN `member` AS M");
+    sql.append("ON A.memberId = M.id");
     sql.append("WHERE A.id = ?", id);
+    sql.append("ORDER BY A.id DESC");
 
     Map<String, Object> articleRow = MysqlUtil.selectRow(sql);
 

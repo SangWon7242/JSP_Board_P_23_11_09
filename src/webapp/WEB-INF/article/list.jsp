@@ -46,6 +46,7 @@
           <col width="200">
           <col width="200">
           <col width="200">
+          <col width="100">
         </colgroup>
         <thead>
         <tr>
@@ -53,6 +54,7 @@
           <th>작성날짜</th>
           <th>수정날짜</th>
           <th>제목</th>
+          <th>작성자</th>
         </tr>
         </thead>
         <tbody>
@@ -65,6 +67,7 @@
           <td>
             <a href="detail?id=<%= articleRow.get("id")%>"><%= articleRow.get("title") %></a>
           </td>
+          <td><%= articleRow.get("writerName") %></td>
         </tr>
         <% } %>
         </tbody>

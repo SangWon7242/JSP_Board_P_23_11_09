@@ -40,6 +40,7 @@
           <col width="200">
           <col width="200">
           <col width="200">
+          <col width="150">
         </colgroup>
         <thead>
         <tr>
@@ -48,6 +49,7 @@
           <th>수정날짜</th>
           <th>제목</th>
           <th>내용</th>
+          <th>작성자</th>
         </tr>
         </thead>
         <tbody>
@@ -57,6 +59,7 @@
             <td><%= articleRow.get("updateDate") %></td>
             <td><%= articleRow.get("title") %></td>
             <td><%= articleRow.get("content") %></td>
+            <td><%= articleRow.get("writerName") %></td>
           </tr>
         </tbody>
       </table>

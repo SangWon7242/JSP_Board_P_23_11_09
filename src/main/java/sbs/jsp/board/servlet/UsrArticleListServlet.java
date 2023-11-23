@@ -36,8 +36,10 @@ public class UsrArticleListServlet extends HttpServlet {
     int totalPage = (int)Math.ceil((double) totalCount / itemInAPage);
 
     sql = new SecSql();
-    sql.append("SELECT A.*");
+    sql.append("SELECT A.*, M.name AS writerName");
     sql.append("FROM article AS A");
+    sql.append("INNER JOIN `member` AS M");
+    sql.append("ON A.memberId = M.id");
     sql.append("ORDER BY A.id DESC");
     sql.append("LIMIT ?, ?", limitFrom, itemInAPage);
 
