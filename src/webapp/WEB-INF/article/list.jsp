@@ -2,7 +2,12 @@
 
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Map" %>
-<%@ page import="sbs.jsp.board.Rq" %>
+
+<%
+  List<Map<String, Object>> articleListMap = (List<Map<String, Object>>) request.getAttribute("articleListMap");
+  int cPage = (int) request.getAttribute("page");
+  int totalPage = (int) request.getAttribute("totalPage");
+%>
 
 <!doctype html>
 <html lang="ko">
@@ -73,30 +78,29 @@
 
       <div class="page" style="display:flex; justify-content: center; gap: 0 10px;">
         <% if(cPage > 1) { %>
-          <a href="list?page=1">◀</a>
+        <a href="list?page=1">◀</a>
         <% } %>
         <%
         int pageMenuSize = 5;
         int from = cPage - pageMenuSize;
 
         if(from < 1) {
-          from = 1;
+        from = 1;
         }
 
         int end = cPage + 10;
         if(end > totalPage) {
-          end = totalPage;
+        end = totalPage;
         }
 
         for(int i = from; i <= end; i++) {%>
-          <a class="<%= cPage == i ? "red" : "" %>" href="list?page=<%=i%>"><%=i%></a>
+        <a class="<%= cPage == i ? "red" : "" %>" href="list?page=<%=i%>"><%=i%></a>
         <% } %>
         <% if(cPage < totalPage) { %>
-          <a href="list?page=<%=totalPage%>">▶</a>
+        <a href="list?page=<%=totalPage%>">▶</a>
         <% } %>
       </div>
     </div>
   </section>
-
 </body>
 </html>
