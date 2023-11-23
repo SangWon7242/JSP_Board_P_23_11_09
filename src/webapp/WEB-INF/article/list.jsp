@@ -4,13 +4,6 @@
 <%@ page import="java.util.Map" %>
 <%@ page import="sbs.jsp.board.Rq" %>
 
-<%
-  Rq rq = new Rq(request, response);
-  List<Map<String, Object>> articleListMap = (List<Map<String, Object>>) rq.getAttr("articleListMap");
-  int cPage = (int)rq.getAttr("page");
-  int totalPage = (int)rq.getAttr("totalPage");
-%>
-
 <!doctype html>
 <html lang="ko">
 <head>
@@ -35,6 +28,8 @@
       color: red;
     }
   </style>
+
+  <%@ include file="../part/topBar.jspf"%>
 
   <section class="section">
     <div class="con">

@@ -3,11 +3,6 @@
 <%@ page import="java.util.Map" %>
 <%@ page import="sbs.jsp.board.Rq" %>
 
-<%
-  Rq rq = new Rq(request, response);
-  Map<String, Object> articleRow = (Map<String, Object>) rq.getAttr("articleRow");
-%>
-
 <!doctype html>
 <html lang="ko">
 <head>
@@ -28,6 +23,8 @@
       justify-content: center;
     }
   </style>
+
+  <%@ include file="../part/topBar.jspf"%>
 
   <section class="section">
     <div class="con">
