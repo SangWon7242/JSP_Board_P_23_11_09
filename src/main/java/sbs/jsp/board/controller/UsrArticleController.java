@@ -95,6 +95,7 @@ public class UsrArticleController {
   public void actionWrite() {
     String title = rq.getParam("title", "");
     String content = rq.getParam("content", "");
+    String redirectUri = rq.getParam("redirectUri", "../article/list");
 
     if (title.length() == 0) {
       rq.historyBack("제목을 입력해주세요.");
@@ -109,20 +110,21 @@ public class UsrArticleController {
     HttpSession session = rq.getSession();
 
     if(session.getAttribute("loginedMemberId") == null) {
-      rq.locationReplace("로그인 후 이용해주세요.", "../member/login");
+      rq.replace("로그인 후 이용해주세요.", "../member/login");
       return;
     }
 
     int loginedMemberId = (int)session.getAttribute("loginedMemberId");
 
     ResultData writeRd = articleService.write(loginedMemberId, title, content);
-
     int id = (int) writeRd.getBody().get("id");
 
-    rq.locationReplace("%d번 게시물이 생성되었습니다.".formatted(id), "detail?id=%d".formatted(id));
+    redirectUri = redirectUri.replace("[NEW_ID]", id + "");
 
-    System.out.println("성공 여부 : " + writeRd.getResultCode());
-    System.out.println("메시지 : " + writeRd.getMsg());
+    // System.out.println("redirectUri : " + redirectUri);
+    // ../article/detail?id=507
+
+    rq.replace(writeRd.getMsg(), redirectUri);
   }
 
   public void showModify() {

@@ -11,9 +11,9 @@ import java.util.Map;
 @ToString
 public class ResultData {
   @Getter
-  private String resultCode;
+  private String resultCode; // 성공 실패를 담을 수 있는 resultCode
   @Getter
-  private String msg;
+  private String msg; // 성공, 실패에 관련 된 msg
   @Getter
   private Map<String, Object> body;
 

@@ -75,10 +75,10 @@ public class Rq {
     println("</script>");
   }
 
-  public void locationReplace(String msg, String url) {
+  public void replace(String msg, String redirectUri) {
     println("<script>");
     printf("alert('%s');\n", msg);
-    printf("location.replace('%s');", url);
+    printf("location.replace('%s');", redirectUri);
     println("</script>");
   }
 
