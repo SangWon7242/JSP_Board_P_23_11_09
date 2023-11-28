@@ -24,32 +24,6 @@ public class DispatcherServlet extends HttpServlet {
 
     Rq rq = new Rq(req, resp);
 
-    String requestUri = req.getRequestURI();
-    String[] requestUriBits = requestUri.split("/");
-    // /usr/article/list
-    // [0]/[1]/[2]/[3]
-
-    int minBitsCount = 4;
-
-    if (requestUriBits.length < minBitsCount) {
-      rq.print("""
-            <script>
-              alert('올바른 요청이 아닙니다.');
-              location.replace('/home/main');
-            </script>
-          """);
-    }
-
-    int controllerTypeNameIndex = 1;
-    int controllerNameIndex = 2;
-    int controllerMethodNameIndex = 3;
-
-    String controllerTypeName = requestUriBits[controllerTypeNameIndex];
-    String controllerName = requestUriBits[controllerNameIndex];
-    String actionMethodName = requestUriBits[controllerMethodNameIndex];
-
-    System.out.printf("%s/%s/%s\n", controllerTypeName, controllerName, actionMethodName);
-
     // 모든 요청을 들어가기 전에 무조건 해야 하는 일 시작
     HttpSession session = req.getSession();
 
@@ -72,25 +46,16 @@ public class DispatcherServlet extends HttpServlet {
     rq.setAttr("loginedMemberRow", loginedMemberRow);
     // 모든 요청을 들어가기 전에 무조건 해야 하는 일 끝
 
-    if(controllerName.equals("home")) {
-      UsrHomeController usrHomeController = new UsrHomeController(rq);
+    switch (rq.getControllerTypeName()) {
+      case "usr"
+          -> {
+        UsrHomeController usrHomeController = new UsrHomeController();
+        UsrArticleController usrArticleController = new UsrArticleController();
 
-      switch (actionMethodName) {
-        case "main" -> usrHomeController.showMain();
-      }
-    }
-
-    if(controllerName.equals("article")) {
-      UsrArticleController usrArticleController = new UsrArticleController(rq);
-
-      switch (actionMethodName) {
-        case "list" -> usrArticleController.showList();
-        case "detail" -> usrArticleController.showDetail();
-        case "write" -> usrArticleController.showWrite();
-        case "doWrite" -> usrArticleController.actionWrite();
-        case "modify" -> usrArticleController.showModify();
-        case "doModify" -> usrArticleController.actionModify();
-        case "doDelete" -> usrArticleController.actionDelete();
+        switch (rq.getControllerName()) {
+          case "home" -> usrHomeController.performAction(rq);
+          case "article" -> usrArticleController.performAction(rq);
+        }
       }
     }
 

@@ -5,14 +5,25 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import lombok.Getter;
 import sbs.jsp.board.util.Ut;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 public class Rq {
+  @Getter
   private final HttpServletRequest req;
+  @Getter
   private final HttpServletResponse resp;
+  @Getter
+  private boolean isInvalid = false;
+  @Getter
+  private String controllerTypeName;
+  @Getter
+  private String controllerName;
+  @Getter
+  private String actionMethodName;
 
   public Rq(HttpServletRequest req, HttpServletResponse resp) {
     this.req = req;
@@ -25,6 +36,27 @@ public class Rq {
     }
     resp.setCharacterEncoding("UTF-8"); // 완성되는 HTML 인코딩을 UTF-8로 하겠다.
     resp.setContentType("text/html; charset-ut-8"); // 브라우저에게 우리가 만든 결과물이 UTF-8이다 라고 알리는 의미
+
+
+    String requestUri = req.getRequestURI();
+    String[] requestUriBits = requestUri.split("/");
+    // /usr/article/list
+    // [0]/[1]/[2]/[3]
+
+    int minBitsCount = 4;
+
+    if (requestUriBits.length < minBitsCount) {
+      isInvalid = true;
+      return;
+    }
+
+    int controllerTypeNameIndex = 1;
+    int controllerNameIndex = 2;
+    int controllerMethodNameIndex = 3;
+
+    controllerTypeName = requestUriBits[controllerTypeNameIndex];
+    controllerName = requestUriBits[controllerNameIndex];
+    actionMethodName = requestUriBits[controllerMethodNameIndex];
   }
 
   public int getIntParam(String paramName, int defaultValue) {
