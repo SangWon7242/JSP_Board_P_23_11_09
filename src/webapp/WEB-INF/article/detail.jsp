@@ -1,30 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ page import="java.util.Map" %>
-<%@ page import="sbs.jsp.board.Rq" %>
 
-<!doctype html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>게시물 상세보기</title>
-</head>
-<body>
+<%
+  Map<String, Object> articleRow = (Map<String, Object>) request.getAttribute("articleRow");
+%>
+
+<%@ include file="../part/head.jspf"%>
   <style>
-    body, ul, li {
-      margin: 0;
-    }
-
     .section {
       display: flex;
       justify-content: center;
     }
   </style>
-
-  <%@ include file="../part/topBar.jspf"%>
 
   <section class="section">
     <div class="con">
@@ -70,5 +58,4 @@
     </div>
   </section>
 
-</body>
-</html>
+<%@ include file="../part/foot.jspf"%>

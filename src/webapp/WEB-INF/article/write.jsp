@@ -1,23 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ page import="java.util.Map" %>
-<%@ page import="sbs.jsp.board.Rq" %>
 
 <%
-  Rq rq = new Rq(request, response);
-  Map<String, Object> articleRow = (Map<String, Object>) rq.getAttr("articleRow");
+  Map<String, Object> articleRow = (Map<String, Object>) request.getAttribute("articleRow");
 %>
 
-<!doctype html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>게시물 작성</title>
-</head>
-<body>
+<%@ include file="../part/head.jspf"%>
   <style>
     body, ul, li {
       margin: 0;
@@ -37,6 +26,4 @@
       </form>
     </div>
   </section>
-
-</body>
-</html>
+<%@ include file="../part/foot.jspf"%>
