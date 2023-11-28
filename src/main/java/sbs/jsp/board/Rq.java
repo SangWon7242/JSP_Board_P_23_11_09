@@ -4,6 +4,7 @@ import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -73,5 +74,10 @@ public class Rq {
     } catch (ServletException | IOException e) {
       throw new RuntimeException(e);
     }
+  }
+
+  public HttpSession getSession() {
+    HttpSession session = req.getSession();
+    return session;
   }
 }
