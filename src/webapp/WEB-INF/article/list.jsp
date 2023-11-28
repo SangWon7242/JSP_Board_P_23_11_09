@@ -4,7 +4,7 @@
 <%@ page import="java.util.Map" %>
 
 <%
-  List<Map<String, Object>> articleListMap = (List<Map<String, Object>>) request.getAttribute("articleListMap");
+  List<Map<String, Object>> articleRows = (List<Map<String, Object>>) request.getAttribute("articleRows");
   int cPage = (int) request.getAttribute("page");
   int totalPage = (int) request.getAttribute("totalPage");
 %>
@@ -43,7 +43,7 @@
         </tr>
         </thead>
         <tbody>
-        <% for(Map<String, Object> articleRow : articleListMap) {
+        <% for(Map<String, Object> articleRow : articleRows) {
         %>
         <tr>
           <td><%= articleRow.get("id") %></td>

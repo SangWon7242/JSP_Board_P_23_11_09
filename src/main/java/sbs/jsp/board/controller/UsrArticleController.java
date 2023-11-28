@@ -2,6 +2,7 @@ package sbs.jsp.board.controller;
 
 import jakarta.servlet.http.HttpSession;
 import sbs.jsp.board.Rq;
+import sbs.jsp.board.service.ArticleService;
 import sbs.jsp.board.util.MysqlUtil;
 import sbs.jsp.board.util.SecSql;
 
@@ -10,36 +11,21 @@ import java.util.Map;
 
 public class UsrArticleController {
   private Rq rq;
+  private ArticleService articleService;
 
   public UsrArticleController(Rq rq) {
     this.rq = rq;
+    articleService = new ArticleService();
   }
 
   public void showList() {
     int page = rq.getIntParam("page", 1);
-    int itemInAPage = 20;
-    int limitFrom = (page - 1) * itemInAPage;
 
-    SecSql sql = new SecSql();
-    sql.append("SELECT COUNT(*)");
-    sql.append("FROM article");
+    int totalPage = articleService.getForPrintListTotalPage();
 
-    int totalCount = MysqlUtil.selectRowIntValue(sql);
-    int totalPage = (int)Math.ceil((double) totalCount / itemInAPage);
+    List<Map<String, Object>> articleRows = articleService.getForPrintArticleRows(page);
 
-    sql = new SecSql();
-    sql.append("SELECT A.*, M.name AS writerName");
-    sql.append("FROM article AS A");
-    sql.append("INNER JOIN `member` AS M");
-    sql.append("ON A.memberId = M.id");
-    sql.append("ORDER BY A.id DESC");
-    sql.append("LIMIT ?, ?", limitFrom, itemInAPage);
-
-    List<Map<String, Object>> articleListMap = MysqlUtil.selectRows(sql);
-
-    System.out.println("articleListMap : " + articleListMap);
-
-    rq.setAttr("articleListMap", articleListMap);
+    rq.setAttr("articleRows", articleRows);
     rq.setAttr("page", page);
     rq.setAttr("totalPage", totalPage);
 
