@@ -30,4 +30,18 @@ public class ArticleRepository {
 
     return articleRows;
   }
+
+  public int write(int loginedMemberId, String title, String content) {
+    SecSql sql = new SecSql();
+    sql.append("INSERT INTO article");
+    sql.append("SET regDate = NOW()");
+    sql.append(", updateDate = NOW()");
+    sql.append(", title = ?", title);
+    sql.append(", content = ?", content);
+    sql.append(", memberId = ?", loginedMemberId);
+
+    int id = MysqlUtil.insert(sql);
+
+    return id;
+  }
 }

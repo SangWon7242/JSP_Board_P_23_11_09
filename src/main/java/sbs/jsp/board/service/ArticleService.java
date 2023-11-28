@@ -1,8 +1,10 @@
 package sbs.jsp.board.service;
 
+import sbs.jsp.board.dto.ResultData;
 import sbs.jsp.board.repository.ArticleRepository;
 import sbs.jsp.board.util.MysqlUtil;
 import sbs.jsp.board.util.SecSql;
+import sbs.jsp.board.util.Ut;
 
 import java.util.List;
 import java.util.Map;
@@ -33,5 +35,10 @@ public class ArticleService {
     List<Map<String, Object>> articleRows = articleRepository.getArticleRows(itemInAPage, limitFrom);
 
     return articleRows;
+  }
+
+  public ResultData write(int loginedMemberId, String title, String content) {
+    int id = articleRepository.write(loginedMemberId, title, content);
+    return ResultData.from("S-1", Ut.f("%d번 게시물이 생성되었습니다.", id), "id", id);
   }
 }

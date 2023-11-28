@@ -33,7 +33,7 @@ public class UsrMemberDoLoginServlet extends HttpServlet {
     Map<String, Object> memberRow = MysqlUtil.selectRow(sql);
 
     if(memberRow.isEmpty()) {
-      rq.appendBody("""
+      rq.print("""
           <script>
             alert('로그인 아이디를 잘 못 입력하셨습니다.');
             history.back();
@@ -42,7 +42,7 @@ public class UsrMemberDoLoginServlet extends HttpServlet {
     }
 
     if(((String) memberRow.get("loginPw")).equals(loginPw) == false) {
-      rq.appendBody("""
+      rq.print("""
           <script>
             alert('로그인 비번을 잘 못 입력하셨습니다.');
             history.back();
@@ -54,7 +54,7 @@ public class UsrMemberDoLoginServlet extends HttpServlet {
     HttpSession session = req.getSession();
     session.setAttribute("loginedMemberId", memberRow.get("id"));
 
-    rq.appendBody("""
+    rq.print("""
           <script>
             alert('로그인 되었습니다.');
             location.replace('/home/main');

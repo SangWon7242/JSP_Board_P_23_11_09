@@ -25,7 +25,7 @@ public class UsrMemberDoLogoutServlet extends HttpServlet {
     HttpSession session = req.getSession();
     session.removeAttribute("loginedMemberId");
 
-    rq.appendBody("""
+    rq.print("""
           <script>
             alert('로그아웃 되었습니다.');
             location.replace('/home/main');

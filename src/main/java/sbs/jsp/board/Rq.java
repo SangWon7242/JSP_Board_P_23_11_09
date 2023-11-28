@@ -5,6 +5,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import sbs.jsp.board.util.Ut;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -51,12 +52,34 @@ public class Rq {
     return value;
   }
 
-  public void appendBody(String str) {
+  public void print(String str) {
     try {
       resp.getWriter().append(str);
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
+  }
+
+  public void println(String str) {
+    print(str + "\n");
+  }
+
+  public void printf(String format, Object... args) {
+    print(Ut.f(format, args));
+  }
+
+  public void historyBack(String msg) {
+    println("<script>");
+    printf("alert('%s');\n", msg);
+    printf("history.back();", msg);
+    println("</script>");
+  }
+
+  public void locationReplace(String msg, String url) {
+    println("<script>");
+    printf("alert('%s');\n", msg);
+    printf("location.replace('%s');", url);
+    println("</script>");
   }
 
   public Object getAttr(String name) {

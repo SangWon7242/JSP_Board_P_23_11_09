@@ -32,7 +32,7 @@ public class DispatcherServlet extends HttpServlet {
     int minBitsCount = 4;
 
     if (requestUriBits.length < minBitsCount) {
-      rq.appendBody("""
+      rq.print("""
             <script>
               alert('올바른 요청이 아닙니다.');
               location.replace('/home/main');

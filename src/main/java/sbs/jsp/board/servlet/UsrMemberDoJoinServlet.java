@@ -33,7 +33,7 @@ public class UsrMemberDoJoinServlet extends HttpServlet {
     boolean isJoinAvailableLoginId = MysqlUtil.selectRowIntValue(sql) == 0;
 
     if(isJoinAvailableLoginId == false) {
-      rq.appendBody("""
+      rq.print("""
           <script>
             alert('%s(은)는 중복 된 로그인 아이디입니다.');
             history.back();
@@ -49,7 +49,7 @@ public class UsrMemberDoJoinServlet extends HttpServlet {
     boolean isJoinAvailableEmail = MysqlUtil.selectRowIntValue(sql) == 0;
 
     if(isJoinAvailableEmail == false) {
-      rq.appendBody("""
+      rq.print("""
           <script>
             alert('%s(은)는 중복 된 이메일입니다.');
             history.back();
@@ -67,7 +67,7 @@ public class UsrMemberDoJoinServlet extends HttpServlet {
     sql.append(", email = ?", email);
 
     int id = MysqlUtil.insert(sql);
-    rq.appendBody("""
+    rq.print("""
           <script>
             alert('%d번 회원이 생성되었습니다.');
             location.replace('/home/main');
