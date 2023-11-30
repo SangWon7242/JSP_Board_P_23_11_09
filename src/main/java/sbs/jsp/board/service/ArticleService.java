@@ -30,13 +30,13 @@ public class ArticleService {
     return totalPage;
   }
 
-  public List<Map<String, Object>> getArticleRows(int page) {
+  public List<Article> getForPrintArticles(int page) {
     int itemInAPage = getItemInAPage();
     int limitFrom = (page - 1) * itemInAPage;
 
-    List<Map<String, Object>> articleRows = articleRepository.getArticleRows(itemInAPage, limitFrom);
+    List<Article> articles = articleRepository.getForPrintArticles(itemInAPage, limitFrom);
 
-    return articleRows;
+    return articles;
   }
 
   public ResultData write(int loginedMemberId, String title, String content) {

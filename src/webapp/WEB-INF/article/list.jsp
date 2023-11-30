@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+<%@ page import="sbs.jsp.board.dto.Article" %>
 <%@ page import="java.util.List" %>
-<%@ page import="java.util.Map" %>
 
 <%
-  List<Map<String, Object>> articleRows = (List<Map<String, Object>>) request.getAttribute("articleRows");
+  List<Article> articles = (List<Article>) request.getAttribute("articles");
   int cPage = (int) request.getAttribute("page");
   int totalPage = (int) request.getAttribute("totalPage");
 %>
@@ -43,16 +43,16 @@
         </tr>
         </thead>
         <tbody>
-        <% for(Map<String, Object> articleRow : articleRows) {
+        <% for(Article article : articles) {
         %>
         <tr>
-          <td><%= articleRow.get("id") %></td>
-          <td><%= articleRow.get("regDate") %></td>
-          <td><%= articleRow.get("updateDate") %></td>
+          <td><%= article.getId() %></td>
+          <td><%= article.getRegDate() %></td>
+          <td><%= article.getUpdateDate() %></td>
           <td>
-            <a href="detail?id=<%= articleRow.get("id")%>"><%= articleRow.get("title") %></a>
+            <a href="detail?id=<%= article.getId()%>"><%= article.getTitle() %></a>
           </td>
-          <td><%= articleRow.get("writerName") %></td>
+          <td><%= article.getExtra__writerName() %></td>
         </tr>
         <% } %>
         </tbody>
