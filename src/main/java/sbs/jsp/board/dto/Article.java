@@ -26,7 +26,6 @@ public class Article {
     this.updateDate = (String) selectRow.get("updateDate");
     this.title = (String) selectRow.get("title");
     this.content = (String) selectRow.get("content");
-    this.regDate = (String) selectRow.get("regDate");
 
     if(selectRow.get("extra__writerName") != null) {
       this.extra__writerName = (String) selectRow.get("extra__writerName");
