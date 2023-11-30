@@ -12,6 +12,7 @@ import java.util.Map;
 public class Article {
   private int id;
   private String regDate;
+  private int memberId;
   private String updateDate;
   private String title;
   private String content;
@@ -21,6 +22,7 @@ public class Article {
   public Article(Map<String, Object> selectRow) {
     this.id = (int) selectRow.get("id");
     this.regDate = (String) selectRow.get("regDate");
+    this.memberId = (int) selectRow.get("memberId");
     this.updateDate = (String) selectRow.get("updateDate");
     this.title = (String) selectRow.get("title");
     this.content = (String) selectRow.get("content");

@@ -7,6 +7,7 @@ import sbs.jsp.board.dto.ResultData;
 import sbs.jsp.board.service.ArticleService;
 import sbs.jsp.board.util.MysqlUtil;
 import sbs.jsp.board.util.SecSql;
+import sbs.jsp.board.util.Ut;
 
 import java.util.List;
 import java.util.Map;
@@ -57,7 +58,7 @@ public class UsrArticleController extends Controller {
     Article article = articleService.getForPrintArticleById(id);
 
     if(article == null) {
-      rq.historyBack("해당 게시물은 없는 게시물입니다.");
+      rq.historyBack(Ut.f("%d번 게시물이 존재하지 않습니다.", id));
       return;
     }
 
@@ -109,23 +110,33 @@ public class UsrArticleController extends Controller {
     int id = rq.getIntParam("id", 0);
 
     if(id == 0) {
-      rq.print("""
-          <script>
-            alert('잘못 된 요청입니다.');
-            history.back();
-          </script>
-          """);
+      rq.historyBack("잘못 된 요청입니다.");
       return;
     }
 
-    SecSql sql = new SecSql();
-    sql.append("SELECT A.*");
-    sql.append("FROM article AS A");
-    sql.append("WHERE A.id = ?", id);
+    HttpSession session = rq.getSession();
 
-    Map<String, Object> articleRow = MysqlUtil.selectRow(sql);
+    if(session.getAttribute("loginedMemberId") == null) {
+      rq.replace("로그인 후 이용해주세요.", "../member/login");
+      return;
+    }
 
-    rq.setAttr("articleRow", articleRow);
+    int loginedMemberId = (int)session.getAttribute("loginedMemberId");
+
+    Article article = articleService.getForPrintArticleById(id);
+
+    if(article == null) {
+      rq.historyBack(Ut.f("%d번 게시물이 존재하지 않습니다.", id));
+    }
+
+    ResultData actorCanModifyRd = articleService.actorCanModify(loginedMemberId, article);
+
+    if(actorCanModifyRd.isFail()) {
+      rq.historyBack(actorCanModifyRd.getMsg());
+      return;
+    }
+
+    rq.setAttr("article", article);
 
     rq.jsp("article/modify");
   }
@@ -134,40 +145,45 @@ public class UsrArticleController extends Controller {
     int id = rq.getIntParam("id", 0);
     String title = rq.getParam("title", "");
     String content = rq.getParam("content", "");
+    String redirectUri = rq.getParam("redirectUri", Ut.f("../article/detail?id=%d", id));
 
     if (title.length() == 0) {
-      rq.print("""
-          <script>
-            alert('제목을 입력해주세요');
-            history.back();
-          </script>
-          """);
+      rq.historyBack("제목을 입력해주세요");
+      return;
     }
 
     if (content.length() == 0) {
-      rq.print("""
-          <script>
-            alert('내용을 입력해주세요');
-            history.back();
-          </script>
-          """);
+      rq.historyBack("내용을 입력해주세요");
+      return;
     }
 
-    SecSql sql = new SecSql();
-    sql.append("UPDATE article");
-    sql.append("SET updateDate = NOW()");
-    sql.append(", title = ?", title);
-    sql.append(", content = ?", content);
-    sql.append("WHERE id = ?", id);
+    if(id == 0) {
+      rq.historyBack("잘못 된 요청입니다.");
+      return;
+    }
 
-    MysqlUtil.update(sql);
+    Article article = articleService.getForPrintArticleById(id);
 
-    rq.print("""
-          <script>
-            alert('%d번 게시물이 수정되었습니다.');
-            location.replace('detail?id=%d');
-          </script>
-          """.formatted(id, id));
+    HttpSession session = rq.getSession();
+
+    if(session.getAttribute("loginedMemberId") == null) {
+      rq.replace("로그인 후 이용해주세요.", "../member/login");
+      return;
+    }
+
+    int loginedMemberId = (int)session.getAttribute("loginedMemberId");
+
+    ResultData actorCanModifyRd = articleService.actorCanModify(loginedMemberId, article);
+
+    if(actorCanModifyRd.isFail()) {
+      rq.historyBack(actorCanModifyRd.getMsg());
+      return;
+    }
+
+    ResultData modifyRd = articleService.modify(id, title, content);
+    redirectUri = redirectUri.replace("[NEW_ID]", id + "");
+
+    rq.replace(modifyRd.getMsg(), redirectUri);
   }
 
   public void actionDelete(Rq rq) {

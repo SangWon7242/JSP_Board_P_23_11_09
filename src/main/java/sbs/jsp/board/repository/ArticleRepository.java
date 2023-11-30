@@ -63,4 +63,15 @@ public class ArticleRepository {
 
     return new Article(MysqlUtil.selectRow(sql));
   }
+
+  public void modify(int id, String title, String content) {
+    SecSql sql = new SecSql();
+    sql.append("UPDATE article");
+    sql.append("SET updateDate = NOW()");
+    sql.append(", title = ?", title);
+    sql.append(", content = ?", content);
+    sql.append("WHERE id = ?", id);
+
+    MysqlUtil.update(sql);
+  }
 }

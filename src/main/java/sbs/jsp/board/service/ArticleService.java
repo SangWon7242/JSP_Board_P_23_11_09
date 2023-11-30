@@ -47,4 +47,18 @@ public class ArticleService {
   public Article getForPrintArticleById(int id) {
     return articleRepository.getForPrintArticleById(id);
   }
+
+  public ResultData modify(int id, String title, String content) {
+    articleRepository.modify(id, title, content);
+
+    return ResultData.from("S-1", Ut.f("%d번 게시물이 수정되었습니다", id), "id", id);
+  }
+
+  public ResultData actorCanModify(int loginedMemberId, Article article) {
+    if(loginedMemberId != article.getMemberId()) {
+      return ResultData.from("F-1", "권한이 없습니다.");
+    }
+
+    return ResultData.from("S-1", "수정이 가능합니다.");
+  }
 }
