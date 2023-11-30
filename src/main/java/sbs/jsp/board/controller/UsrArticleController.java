@@ -2,6 +2,7 @@ package sbs.jsp.board.controller;
 
 import jakarta.servlet.http.HttpSession;
 import sbs.jsp.board.Rq;
+import sbs.jsp.board.dto.Article;
 import sbs.jsp.board.dto.ResultData;
 import sbs.jsp.board.service.ArticleService;
 import sbs.jsp.board.util.MysqlUtil;
@@ -46,56 +47,21 @@ public class UsrArticleController extends Controller {
   }
 
   public void showDetail(Rq rq) {
-    HttpSession session = rq.getSession();
-
-    boolean isLogined = false;
-    int loginedMemberId = -1;
-    Map<String, Object> loginedMemberRow = null;
-
-    if(session.getAttribute("loginedMemberId") != null) {
-      loginedMemberId = (int) session.getAttribute("loginedMemberId");
-      isLogined = true;
-
-      SecSql sql = new SecSql();
-      sql.append("SELECT * FROM `member`");
-      sql.append("WHERE id = ?", loginedMemberId);
-      loginedMemberRow = MysqlUtil.selectRow(sql);
-    }
-
-    rq.setAttr("isLogined", isLogined); // 로그인 여부
-    rq.setAttr("loginedMemberId", loginedMemberId);
-    rq.setAttr("loginedMemberRow", loginedMemberRow);
-
     int id = rq.getIntParam("id", 0);
 
     if(id == 0) {
-      rq.print("<script>alert('잘못 된 요청입니다.'); history.back(); </script>");
+      rq.historyBack("잘못 된 요청입니다.");
       return;
     }
 
-    SecSql sql = new SecSql();
-    sql.append("SELECT COUNT(*)");
-    sql.append("FROM article AS A");
-    sql.append("WHERE A.id = ?", id);
+    Article article = articleService.getForPrintArticleById(id);
 
-    boolean articleIsExists = MysqlUtil.selectRowBooleanValue(sql);
-
-    if(articleIsExists == false) {
-      rq.print("<script>alert('해당 게시물은 없는 게시물입니다.'); history.back(); </script>");
+    if(article == null) {
+      rq.historyBack("해당 게시물은 없는 게시물입니다.");
       return;
     }
 
-    sql = new SecSql();
-    sql.append("SELECT A.*, M.name AS writerName");
-    sql.append("FROM article AS A");
-    sql.append("INNER JOIN `member` AS M");
-    sql.append("ON A.memberId = M.id");
-    sql.append("WHERE A.id = ?", id);
-    sql.append("ORDER BY A.id DESC");
-
-    Map<String, Object> articleRow = MysqlUtil.selectRow(sql);
-
-    rq.setAttr("articleRow", articleRow);
+    rq.setAttr("article", article);
 
     rq.jsp("article/detail");
   }

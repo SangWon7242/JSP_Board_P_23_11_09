@@ -1,5 +1,6 @@
 package sbs.jsp.board.repository;
 
+import sbs.jsp.board.dto.Article;
 import sbs.jsp.board.util.MysqlUtil;
 import sbs.jsp.board.util.SecSql;
 
@@ -43,5 +44,17 @@ public class ArticleRepository {
     int id = MysqlUtil.insert(sql);
 
     return id;
+  }
+
+  public Article getForPrintArticleById(int id) {
+    SecSql sql = new SecSql();
+    sql.append("SELECT A.*, M.name AS extra__writerName");
+    sql.append("FROM article AS A");
+    sql.append("INNER JOIN `member` AS M");
+    sql.append("ON A.memberId = M.id");
+    sql.append("WHERE A.id = ?", id);
+    sql.append("ORDER BY A.id DESC");
+
+    return new Article(MysqlUtil.selectRow(sql));
   }
 }

@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.ToString;
 
+import java.util.Map;
+
 @Data
 @AllArgsConstructor
 @ToString
@@ -13,4 +15,19 @@ public class Article {
   private String updateDate;
   private String title;
   private String content;
+
+  private String extra__writerName;
+
+  public Article(Map<String, Object> selectRow) {
+    this.id = (int) selectRow.get("id");
+    this.regDate = (String) selectRow.get("regDate");
+    this.updateDate = (String) selectRow.get("updateDate");
+    this.title = (String) selectRow.get("title");
+    this.content = (String) selectRow.get("content");
+    this.regDate = (String) selectRow.get("regDate");
+
+    if(selectRow.get("extra__writerName") != null) {
+      this.extra__writerName = (String) selectRow.get("extra__writerName");
+    }
+  }
 }
