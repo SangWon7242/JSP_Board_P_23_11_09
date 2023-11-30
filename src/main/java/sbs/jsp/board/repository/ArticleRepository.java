@@ -74,4 +74,13 @@ public class ArticleRepository {
 
     MysqlUtil.update(sql);
   }
+
+  public void delete(int id) {
+    SecSql sql = new SecSql();
+    sql.append("DELETE");
+    sql.append("FROM article");
+    sql.append("WHERE id = ?", id);
+
+    MysqlUtil.delete(sql);
+  }
 }

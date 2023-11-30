@@ -10,7 +10,6 @@ import sbs.jsp.board.util.SecSql;
 import sbs.jsp.board.util.Ut;
 
 import java.util.List;
-import java.util.Map;
 
 public class UsrArticleController extends Controller {
   private ArticleService articleService;
@@ -181,48 +180,43 @@ public class UsrArticleController extends Controller {
     }
 
     ResultData modifyRd = articleService.modify(id, title, content);
-    redirectUri = redirectUri.replace("[NEW_ID]", id + "");
 
     rq.replace(modifyRd.getMsg(), redirectUri);
   }
 
   public void actionDelete(Rq rq) {
     int id = rq.getIntParam("id", 0);
+    String redirectUri = rq.getParam("redirectUri", "../article/list");
 
     if(id == 0) {
-      rq.print("<script>alert('잘못 된 요청입니다.'); history.back(); </script>");
+      rq.historyBack("잘못 된 요청입니다.");
       return;
     }
 
-    SecSql sql = new SecSql();
-    sql.append("SELECT COUNT(*)");
-    sql.append("FROM article AS A");
-    sql.append("WHERE A.id = ?", id);
+    Article article = articleService.getForPrintArticleById(id);
 
-    boolean articleIsExists = MysqlUtil.selectRowBooleanValue(sql);
+    HttpSession session = rq.getSession();
 
-    if(articleIsExists == false) {
-      rq.print("""
-          <script>
-            alert('해당 게시물은 없는 게시물입니다.');
-            location.replace('list');
-          </script>
-          """);
+    if(session.getAttribute("loginedMemberId") == null) {
+      rq.replace("로그인 후 이용해주세요.", "../member/login");
       return;
     }
 
-    sql = new SecSql();
-    sql.append("DELETE");
-    sql.append("FROM article");
-    sql.append("WHERE id = ?", id);
+    int loginedMemberId = (int)session.getAttribute("loginedMemberId");
 
-    MysqlUtil.delete(sql);
+    ResultData actorCanDeleteRd = articleService.actorCanDelete(loginedMemberId, article);
 
-    rq.print("""
-        <script>
-          alert('%d번 글이 삭제되었습니다.');
-          location.replace('list');
-        </script>
-        """.formatted(id));
+    if(actorCanDeleteRd.isFail()) {
+      rq.historyBack(actorCanDeleteRd.getMsg());
+      return;
+    }
+
+    if(article == null) {
+      rq.historyBack(Ut.f("%d번 게시물이 존재하지 않습니다.", id));
+    }
+
+    ResultData deleteRd = articleService.delete(id);
+
+    rq.replace(deleteRd.getMsg(), redirectUri);
   }
 }

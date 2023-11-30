@@ -3,12 +3,10 @@ package sbs.jsp.board.service;
 import sbs.jsp.board.dto.Article;
 import sbs.jsp.board.dto.ResultData;
 import sbs.jsp.board.repository.ArticleRepository;
-import sbs.jsp.board.util.MysqlUtil;
-import sbs.jsp.board.util.SecSql;
 import sbs.jsp.board.util.Ut;
 
+import java.lang.reflect.Member;
 import java.util.List;
-import java.util.Map;
 
 public class ArticleService {
   private ArticleRepository articleRepository;
@@ -60,5 +58,20 @@ public class ArticleService {
     }
 
     return ResultData.from("S-1", "수정이 가능합니다.");
+  }
+
+  public ResultData delete(int id) {
+    articleRepository.delete(id);
+
+    return ResultData.from("S-1", Ut.f("%d번 게시물이 삭제되었습니다.", id), "id", id);
+  }
+
+  public ResultData actorCanDelete(int loginedMemberId, Article article) {
+
+    if(loginedMemberId != article.getMemberId()) {
+      return ResultData.from("F-1", "권한이 없습니다.");
+    }
+
+    return ResultData.from("S-1", "삭제가 가능합니다.");
   }
 }
