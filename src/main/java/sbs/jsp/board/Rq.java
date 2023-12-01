@@ -142,9 +142,12 @@ public class Rq {
     }
   }
 
-  public HttpSession getSession() {
-    HttpSession session = req.getSession();
-    return session;
+  public <T> T getSessionAttr(String attrName) {
+//    if(req.getSession().getAttribute(attrName) == null ) {
+//      return defaultValue;
+//    }
+
+    return (T) req.getSession().getAttribute(attrName);
   }
 
   public void setSessionAttr(String attrName, Object attValue) {

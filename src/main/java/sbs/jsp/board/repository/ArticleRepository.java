@@ -1,6 +1,7 @@
 package sbs.jsp.board.repository;
 
 import sbs.jsp.board.dto.Article;
+import sbs.jsp.board.dto.Member;
 import sbs.jsp.board.util.MysqlUtil;
 import sbs.jsp.board.util.SecSql;
 
@@ -38,14 +39,14 @@ public class ArticleRepository {
     return articles;
   }
 
-  public int write(int loginedMemberId, String title, String content) {
+  public int write(Member loginedMember, String title, String content) {
     SecSql sql = new SecSql();
     sql.append("INSERT INTO article");
     sql.append("SET regDate = NOW()");
     sql.append(", updateDate = NOW()");
     sql.append(", title = ?", title);
     sql.append(", content = ?", content);
-    sql.append(", memberId = ?", loginedMemberId);
+    sql.append(", memberId = ?", loginedMember.getId());
 
     int id = MysqlUtil.insert(sql);
 
