@@ -41,7 +41,7 @@
   <header class="top-bar">
     <c:if test="${rq.logined}" >
       <div>
-        "홍길동" 님 환영합니다.
+        "${rq.loginedMember.name}" 님 환영합니다.
       </div>
     </c:if>
 

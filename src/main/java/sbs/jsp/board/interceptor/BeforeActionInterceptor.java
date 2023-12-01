@@ -8,8 +8,8 @@ public class BeforeActionInterceptor extends Interceptor {
   public boolean runBeforeAction(Rq rq) {
     if (rq.getSessionAttr("loginedMember") != null) {
       rq.setLogined(true);
-      rq.setLogineMember(rq.getSessionAttr("loginedMember"));
-      rq.setLoginedMemberId(rq.getLogineMember().getId());
+      rq.setLoginedMember(rq.getSessionAttr("loginedMember"));
+      rq.setLoginedMemberId(rq.getLoginedMember().getId());
     }
 
     rq.setAttr("rq", rq);

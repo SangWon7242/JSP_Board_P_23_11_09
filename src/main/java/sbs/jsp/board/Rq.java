@@ -31,7 +31,7 @@ public class Rq {
 
   @Getter
   @Setter
-  private Member logineMember = null;
+  private Member loginedMember = null;
 
   @Getter
   private String controllerTypeName;
