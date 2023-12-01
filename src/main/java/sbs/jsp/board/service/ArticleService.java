@@ -1,18 +1,18 @@
 package sbs.jsp.board.service;
 
+import sbs.jsp.board.container.Container;
 import sbs.jsp.board.dto.Article;
 import sbs.jsp.board.dto.ResultData;
 import sbs.jsp.board.repository.ArticleRepository;
 import sbs.jsp.board.util.Ut;
 
-import java.lang.reflect.Member;
 import java.util.List;
 
 public class ArticleService {
   private ArticleRepository articleRepository;
 
   public ArticleService() {
-    articleRepository = new ArticleRepository();
+    articleRepository = Container.articleRepository;
   }
 
   public int getItemInAPage() {

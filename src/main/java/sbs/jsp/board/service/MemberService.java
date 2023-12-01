@@ -1,5 +1,6 @@
 package sbs.jsp.board.service;
 
+import sbs.jsp.board.container.Container;
 import sbs.jsp.board.dto.Member;
 import sbs.jsp.board.dto.ResultData;
 import sbs.jsp.board.repository.MemberRepository;
@@ -9,7 +10,7 @@ public class MemberService {
   private MemberRepository memberRepository;
 
   public MemberService() {
-    memberRepository = new MemberRepository();
+    memberRepository = Container.memberRepository;
   }
 
   public ResultData join(String loginId, String loginPw, String name, String email) {

@@ -2,6 +2,7 @@ package sbs.jsp.board.controller;
 
 import jakarta.servlet.http.HttpSession;
 import sbs.jsp.board.Rq;
+import sbs.jsp.board.container.Container;
 import sbs.jsp.board.dto.Article;
 import sbs.jsp.board.dto.ResultData;
 import sbs.jsp.board.service.ArticleService;
@@ -15,7 +16,7 @@ public class UsrArticleController extends Controller {
   private ArticleService articleService;
 
   public UsrArticleController() {
-    articleService = new ArticleService();
+    articleService = Container.articleService;
   }
 
   @Override

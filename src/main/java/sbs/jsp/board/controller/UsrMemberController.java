@@ -1,19 +1,15 @@
 package sbs.jsp.board.controller;
 
-import jakarta.servlet.http.HttpSession;
 import sbs.jsp.board.Rq;
+import sbs.jsp.board.container.Container;
 import sbs.jsp.board.dto.Member;
 import sbs.jsp.board.dto.ResultData;
 import sbs.jsp.board.service.MemberService;
-import sbs.jsp.board.util.MysqlUtil;
-import sbs.jsp.board.util.SecSql;
-
-import java.util.Map;
 
 public class UsrMemberController extends Controller {
   private MemberService memberService;
   public UsrMemberController() {
-    memberService = new MemberService();
+    memberService = Container.memberService;
   }
 
   @Override
