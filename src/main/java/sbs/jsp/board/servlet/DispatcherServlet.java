@@ -24,7 +24,7 @@ public class DispatcherServlet extends HttpServlet {
       return;
     }
 
-    if(runInterceptor(rq) == true) {
+    if(runInterceptor(rq) == false) {
       return;
     }
 
@@ -48,15 +48,15 @@ public class DispatcherServlet extends HttpServlet {
   }
 
   private boolean runInterceptor(Rq rq) {
-    if(Container.beforeActionInterceptor.runBeforeAction(rq)) {
+    if(Container.beforeActionInterceptor.runBeforeAction(rq) == false) {
       return false;
     }
 
-    if(Container.needLoginInterceptor.runBeforeAction(rq)) {
+    if(Container.needLoginInterceptor.runBeforeAction(rq) == false) {
       return false;
     }
 
-    if(Container.needLogoutInterceptor.runBeforeAction(rq)) {
+    if(Container.needLogoutInterceptor.runBeforeAction(rq) == false) {
       return false;
     }
 
