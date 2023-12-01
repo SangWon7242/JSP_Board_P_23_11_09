@@ -35,29 +35,40 @@
 
     html > body {
       font-family: 'GmarketSansMedium';
+      text-underline-position: under;
+    }
+
+    .menu-box-1 > ul > li:hover > a {
+      text-decoration: underline;
     }
   </style>
 
-  <header class="top-bar">
-    <c:if test="${rq.logined}" >
-      <div>
-        "${rq.loginedMember.name}" 님 환영합니다.
-      </div>
-    </c:if>
+  <header class="navbar bg-[#cfcfcf] border-b-2">
+   <div class="con mx-auto w-[1100px]">
+     <a class="btn btn-ghost text-xl logo" href="../home/main">JSP커뮤니티</a>
+     <nav class="menu-box-1 ml-auto">
+       <ul class="flex gap-x-[20px]">
+         <c:if test="${rq.logined}" >
+           <div>
+             "${rq.loginedMember.name}" 님 환영합니다.
+           </div>
+         </c:if>
 
-    <nav class="menu-box-1">
-      <ul style="display:flex; gap: 0 10px">
-        <li><a href="/usr/article/list">게시물 리스트</a></li>
-        <li><a href="/usr/member/join">회원가입</a></li>
-        <c:if test="${rq.notLogined}" >
-          <li><a href="/usr/member/login">로그인</a></li>
-        </c:if>
-        <c:if test="${rq.logined}" >
-          <li><a href="/usr/member/doLogout">로그아웃</a></li>
-        </c:if>
-      </ul>
-    </nav>
+         <li><a href="/usr/article/list">게시물 리스트</a></li>
+         <c:if test="${rq.notLogined}" >
+         <li><a href="/usr/member/join">회원가입</a></li>
+         </c:if>
+         <c:if test="${rq.notLogined}" >
+           <li><a href="/usr/member/login">로그인</a></li>
+         </c:if>
+         <c:if test="${rq.logined}" >
+           <li><a href="/usr/member/doLogout">로그아웃</a></li>
+         </c:if>
+       </ul>
+     </nav>
+   </div>
   </header>
+
 
 
 
