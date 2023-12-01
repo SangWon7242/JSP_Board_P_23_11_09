@@ -5,18 +5,12 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import sbs.jsp.board.Rq;
 import sbs.jsp.board.container.Container;
 import sbs.jsp.board.controller.Controller;
-import sbs.jsp.board.controller.UsrArticleController;
-import sbs.jsp.board.controller.UsrHomeController;
-import sbs.jsp.board.controller.UsrMemberController;
 import sbs.jsp.board.util.MysqlUtil;
-import sbs.jsp.board.util.SecSql;
 
 import java.io.IOException;
-import java.util.Map;
 
 @WebServlet("/usr/*")
 public class DispatcherServlet extends HttpServlet {
@@ -30,11 +24,11 @@ public class DispatcherServlet extends HttpServlet {
       return;
     }
 
-    Controller controller = null;
-
-    if(runInterceptor(rq) == false) {
+    if(runInterceptor(rq) == true) {
       return;
     }
+
+    Controller controller = null;
 
     switch (rq.getControllerTypeName()) {
       case "usr"

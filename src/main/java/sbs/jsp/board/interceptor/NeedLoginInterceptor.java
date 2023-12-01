@@ -6,18 +6,17 @@ public class NeedLoginInterceptor extends Interceptor {
   @Override
   public boolean runBeforeAction(Rq rq) {
     switch (rq.getActionPath()) {
-      case "/usr/article/write":
-      case "/usr/article/doWrite":
-      case "/usr/article/modify":
-      case "/usr/article/doModify":
-      case "/usr/article/doDelete":
-      case "/usr/member/doLogout":
-        return false;
+      case "/usr/article/list":
+      case "/usr/article/detail":
+      case "/usr/home/main":
+      case "/usr/member/login":
+      case "/usr/member/doLogin":
+        return true;
     }
 
     if(rq.isNotLogined()) {
       rq.historyBack("로그인 후 이용해주세요.");
-      return true;
+      return false;
     }
 
     return true;

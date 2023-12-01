@@ -1,13 +1,5 @@
+<%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.Map" %>
-
-<%
-  Map<String, Object> loginedMemberRow = (Map<String, Object>) request.getAttribute("loginedMemberRow");
-  boolean isLogined = (boolean) request.getAttribute("isLogined");
-  int loginedMemberId = (int) request.getAttribute("loginedMemberId");
-%>
 
 <!doctype html>
 <html lang="ko">
@@ -47,22 +39,22 @@
   </style>
 
   <header class="top-bar">
-    <% if(isLogined) { %>
-    <div>
-      "<%=loginedMemberRow.get("name")%>" 님 환영합니다.
-    </div>
-    <% } %>
+    <c:if test="${rq.logined}" >
+      <div>
+        "홍길동" 님 환영합니다.
+      </div>
+    </c:if>
 
     <nav class="menu-box-1">
       <ul style="display:flex; gap: 0 10px">
         <li><a href="/usr/article/list">게시물 리스트</a></li>
         <li><a href="/usr/member/join">회원가입</a></li>
-        <% if(!isLogined) { %>
-        <li><a href="/usr/member/login">로그인</a></li>
-        <% } %>
-        <% if(isLogined) { %>
-        <li><a href="/usr/member/doLogout">로그아웃</a></li>
-        <% } %>
+        <c:if test="${rq.notLogined}" >
+          <li><a href="/usr/member/login">로그인</a></li>
+        </c:if>
+        <c:if test="${rq.logined}" >
+          <li><a href="/usr/member/doLogout">로그아웃</a></li>
+        </c:if>
       </ul>
     </nav>
   </header>
