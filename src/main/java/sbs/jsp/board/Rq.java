@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.Getter;
+import lombok.Setter;
 import sbs.jsp.board.dto.Member;
 import sbs.jsp.board.util.Ut;
 
@@ -21,12 +22,15 @@ public class Rq {
   private boolean isInvalid = false;
 
   @Getter
+  @Setter
   private boolean isLogined = false;
 
   @Getter
+  @Setter
   private int loginedMemberId = 0;
 
   @Getter
+  @Setter
   private Member logineMember = null;
 
   @Getter
@@ -35,6 +39,10 @@ public class Rq {
   private String controllerName;
   @Getter
   private String actionMethodName;
+
+  public boolean isNotLogined() {
+    return isLogined == false;
+  }
 
   public Rq(HttpServletRequest req, HttpServletResponse resp) {
     this.req = req;
@@ -142,6 +150,10 @@ public class Rq {
     }
   }
 
+  public String getActionPath() {
+    return "/" + controllerTypeName + "/" + controllerName + "/" + actionMethodName;
+  }
+
   public <T> T getSessionAttr(String attrName) {
 //    if(req.getSession().getAttribute(attrName) == null ) {
 //      return defaultValue;
@@ -157,4 +169,5 @@ public class Rq {
   public void removeSessionAttr(String attrName) {
     req.getSession().removeAttribute(attrName);
   }
+
 }
