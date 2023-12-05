@@ -29,11 +29,11 @@ public class ArticleService {
     return totalPage;
   }
 
-  public List<Article> getForPrintArticles(int page) {
+  public List<Article> getForPrintArticles(int page, String searchKeywordTypeCode, String searchKeyword) {
     int itemInAPage = getItemInAPage();
     int limitFrom = (page - 1) * itemInAPage;
 
-    List<Article> articles = articleRepository.getForPrintArticles(itemInAPage, limitFrom);
+    List<Article> articles = articleRepository.getForPrintArticles(searchKeywordTypeCode, searchKeyword, itemInAPage, limitFrom);
 
     return articles;
   }
@@ -92,7 +92,7 @@ public class ArticleService {
     return ResultData.from("S-1", "삭제가 가능합니다.");
   }
 
-  public int getTotalItemsCount() {
-    return articleRepository.getTotalItemsCount();
+  public int getTotalItemsCount(String searchKeywordTypeCode, String searchKeyword) {
+    return articleRepository.getTotalItemsCount(searchKeywordTypeCode, searchKeyword);
   }
 }

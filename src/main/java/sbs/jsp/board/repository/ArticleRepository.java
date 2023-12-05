@@ -20,12 +20,33 @@ public class ArticleRepository {
     return totalCount;
   }
 
-  public List<Article> getForPrintArticles(int itemInAPage, int limitFrom) {
+  public List<Article> getForPrintArticles(String searchKeywordTypeCode, String searchKeyword, int itemInAPage, int limitFrom) {
     SecSql sql = new SecSql();
     sql.append("SELECT A.*, M.name AS extra__writerName");
     sql.append("FROM article AS A");
     sql.append("INNER JOIN `member` AS M");
     sql.append("ON A.memberId = M.id");
+    sql.append("WHERE 1");
+
+    if(searchKeyword != null && searchKeyword.length() > 0) {
+      switch (searchKeywordTypeCode) {
+        case "title,content":
+          sql.append("AND (");
+          sql.append("A.title LIKE CONCAT('%', ?, '%')", searchKeyword);
+          sql.append("OR");
+          sql.append("A.content LIKE CONCAT('%', ?, '%')", searchKeyword);
+          sql.append(")");
+          break;
+        case "content":
+          sql.append("AND A.content LIKE CONCAT('%', ?, '%')", searchKeyword);
+          break;
+        case "title":
+        default:
+          sql.append("AND A.title LIKE CONCAT('%', ?, '%')", searchKeyword);
+          break;
+      }
+    }
+
     sql.append("ORDER BY A.id DESC");
     sql.append("LIMIT ?, ?", limitFrom, itemInAPage);
 
@@ -85,10 +106,29 @@ public class ArticleRepository {
     MysqlUtil.delete(sql);
   }
 
-  public int getTotalItemsCount() {
+  public int getTotalItemsCount(String searchKeywordTypeCode, String searchKeyword) {
     SecSql sql = new SecSql();
     sql.append("SELECT COUNT(*) AS cnt");
     sql.append("FROM article AS A");
+    sql.append("WHERE 1");
+    if(searchKeyword != null && searchKeyword.length() > 0) {
+      switch (searchKeywordTypeCode) {
+        case "title,content":
+          sql.append("AND (");
+          sql.append("A.title LIKE CONCAT('%', ?, '%')", searchKeyword);
+          sql.append("OR");
+          sql.append("A.content LIKE CONCAT('%', ?, '%')", searchKeyword);
+          sql.append(")");
+          break;
+        case "content":
+          sql.append("AND A.content LIKE CONCAT('%', ?, '%')", searchKeyword);
+          break;
+        case "title":
+        default:
+          sql.append("AND A.title LIKE CONCAT('%', ?, '%')", searchKeyword);
+          break;
+      }
+    }
 
     return MysqlUtil.selectRowIntValue(sql);
   }
