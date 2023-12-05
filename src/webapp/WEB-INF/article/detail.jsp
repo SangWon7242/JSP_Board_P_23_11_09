@@ -7,55 +7,49 @@
 %>
 
 <%@ include file="../part/head.jspf"%>
-  <style>
-    .section {
-      display: flex;
-      justify-content: center;
-    }
-  </style>
 
-  <section class="section">
-    <div class="con">
-      <h1>게시물 상세보기</h1>
-
-      <table border="1" style="border-collapse: collapse; text-align:center;">
-        <colgroup>
-          <col width="50">
-          <col width="200">
-          <col width="200">
-          <col width="200">
-          <col width="200">
-          <col width="150">
-        </colgroup>
-        <thead>
-        <tr>
-          <th>번호</th>
-          <th>작성날짜</th>
-          <th>수정날짜</th>
-          <th>제목</th>
-          <th>내용</th>
-          <th>작성자</th>
-        </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><%= article.getId() %></td>
-            <td><%= article.getRegDate() %></td>
-            <td><%= article.getUpdateDate() %></td>
-            <td><%= article.getTitle() %></td>
-            <td><%= article.getContent() %></td>
-            <td><%= article.getExtra__writerName() %></td>
-          </tr>
-        </tbody>
-      </table>
-      <div class="btn-group">
-        <a href="list">리스트</a>
-        &nbsp;
-        <a href="doDelete?id=${param.id}">삭제</a>
-        &nbsp;
-        <a href="modify?id=${param.id}">수정</a>
+<section class="article-detail-wrap">
+  <div class="con mx-auto w-[1100px]">
+    <h1 class="badge badge-neutral my-[10px]">게시물 상세보기</h1>
+    <div class="article-detail-box border rounded-xl h-[600px] p-[20px] flex flex-col">
+      <div class="article-datail__head border-b">
+        <div class="title h-[80px] flex items-center">
+          <h1 class="text-[2rem]">
+            <%= article.getTitle() %>
+          </h1>
+        </div>
+        <div class="write-info">
+          <div class="writer-name font-bold badge badge-ghost !p-3">
+            <span>작성자 : </span>
+            &nbsp;
+            <span><%= article.getExtra__writerName() %></span>
+          </div>
+          <div class="write-date flex gap-x-3 ml-[3px] my-3">
+            <div class="write-date__regdate badge badge-primary badge-outline">
+              <span>작성날짜 :</span>
+              &nbsp;
+              <span><%= article.getRegDate() %></span>
+            </div>
+            <div class="write-date__updateDate badge badge-secondary badge-outline">
+              <span>수정날짜 :</span>
+              &nbsp;
+              <span><%= article.getUpdateDate() %></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="article-datail__body flex-grow">
+        <div class="content-box text-[2rem] mt-[20px]">
+          <%= article.getContent() %>
+        </div>
       </div>
     </div>
-  </section>
 
+    <div class="btn-group mt-[10px]">
+      <a href="list" class="btn">리스트</a>&nbsp;
+      <a href="doDelete?id=${param.id}" class="btn btn-primary">삭제</a>&nbsp;
+      <a href="modify?id=${param.id}" class="btn btn-secondary">수정</a>
+    </div>
+  </div>
+</section>
 <%@ include file="../part/foot.jspf"%>
