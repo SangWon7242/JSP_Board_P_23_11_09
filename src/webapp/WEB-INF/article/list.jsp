@@ -1,14 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<%@ page import="sbs.jsp.board.dto.Article" %>
-<%@ page import="java.util.List" %>
-
-<%
-  List<Article> articles = (List<Article>) request.getAttribute("articles");
-  int cPage = (int) request.getAttribute("page");
-  int totalPage = (int) request.getAttribute("totalPage");
-%>
-
 <%@ include file="../part/head.jspf"%>
   <section class="article-list-wrap">
     <div class="con mx-auto w-[1100px]">
@@ -25,18 +16,17 @@
             </tr>
           </thead>
           <tbody>
-          <% for(Article article : articles) {
-          %>
+          <c:forEach items="${articles}" var="article">
           <tr>
-            <td><%= article.getId() %></td>
-            <td><%= article.getRegDate() %></td>
-            <td><%= article.getUpdateDate() %></td>
+            <td>${article.id}</td>
+            <td>${article.regDate}</td>
+            <td>${article.updateDate}</td>
             <td>
-              <a href="detail?id=<%= article.getId()%>"><%= article.getTitle() %></a>
+              <a href="detail?id=${article.id}">${article.title}</a>
             </td>
-            <td><%= article.getExtra__writerName() %></td>
+            <td>${article.extra__writerName}</td>
           </tr>
-          <% } %>
+          </c:forEach>
           </tbody>
         </table>
       </div>
@@ -45,28 +35,35 @@
       </div>
 
       <div class="page flex justify-center mt-[15px]">
-        <% if(cPage > 1) { %>
-        <a href="list?page=1" class="btn">◀</a>
-        <% } %>
-        <%
-        int pageMenuSize = 5;
-        int from = cPage - pageMenuSize;
+        <c:set var="cPage" value="${page}" />
+        <c:set var="totalPage" value="${totalPage}" />
 
-        if(from < 1) {
-        from = 1;
-        }
+        <c:choose>
+          <c:when test="${cPage > 1}">
+            <button onclick="location.href='list?page=1'" class="btn">◀</button>
+          </c:when>
+          <c:when test="${cPage == 1}">
+            <button onclick="location.href='list?page=1'" class="btn" disabled>◀</button>
+          </c:when>
+        </c:choose>
 
-        int end = cPage + 10;
-        if(end > totalPage) {
-        end = totalPage;
-        }
+        <c:set var="pageMenuSize" value="5" />
+        <c:set var="startPage" value="${cPage - pageMenuSize > 1 ? cPage - pageMenuSize : 1}" />
+        <c:set var="endPage" value="${cPage + 10 < totalPage ? cPage + 10 : totalPage}" />
 
-        for(int i = from; i <= end; i++) {%>
-        <a class="btn <%= cPage == i ? "btn-active" : "" %>" href="list?page=<%=i%>"><%=i%></a>
-        <% } %>
-        <% if(cPage < totalPage) { %>
-        <a href="list?page=<%=totalPage%>" class="btn">▶</a>
-        <% } %>
+        <c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
+          <c:set var="aClassStr" value="${cPage == i ? 'btn-active' : ''}" />
+          <a class="btn ${aClassStr}" href="list?page=${i}">${i}</a>
+        </c:forEach>
+
+        <c:choose>
+          <c:when test="${cPage < totalPage}">
+            <button onclick="location.href='list?page=${totalPage}'" class="btn">▶</button>
+          </c:when>
+          <c:when test="${cPage == totalPage}">
+            <button onclick="location.href='list?page=${totalPage}'" class="btn" disabled>▶</button>
+          </c:when>
+        </c:choose>
       </div>
     </div>
   </section>
