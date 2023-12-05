@@ -46,9 +46,13 @@
     </div>
 
     <div class="btn-group mt-[10px]">
-      <a href="list" class="btn">리스트</a>&nbsp;
-      <a href="doDelete?id=${param.id}" class="btn btn-primary">삭제</a>&nbsp;
-      <a href="modify?id=${param.id}" class="btn btn-secondary">수정</a>
+      <a href="list" class="btn">리스트</a>
+      <c:if test="${article.extra__actorCanDelete}">
+        <a href="doDelete?id=${param.id}" class="btn btn-primary">삭제</a>&nbsp;
+      </c:if>
+      <c:if test="${article.extra__actorCanModify}">
+        <a href="modify?id=${param.id}" class="btn btn-secondary">수정</a>
+      </c:if>
     </div>
   </div>
 </section>

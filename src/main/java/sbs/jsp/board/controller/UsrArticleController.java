@@ -1,14 +1,10 @@
 package sbs.jsp.board.controller;
 
-import jakarta.servlet.http.HttpSession;
 import sbs.jsp.board.Rq;
 import sbs.jsp.board.container.Container;
 import sbs.jsp.board.dto.Article;
-import sbs.jsp.board.dto.Member;
 import sbs.jsp.board.dto.ResultData;
 import sbs.jsp.board.service.ArticleService;
-import sbs.jsp.board.util.MysqlUtil;
-import sbs.jsp.board.util.SecSql;
 import sbs.jsp.board.util.Ut;
 
 import java.util.List;
@@ -56,7 +52,7 @@ public class UsrArticleController extends Controller {
       return;
     }
 
-    Article article = articleService.getForPrintArticleById(id);
+    Article article = articleService.getForPrintArticleById(rq.getLoginedMember(), id);
 
     if(article == null) {
       rq.historyBack(Ut.f("%d번 게시물이 존재하지 않습니다.", id));
@@ -106,7 +102,7 @@ public class UsrArticleController extends Controller {
       return;
     }
 
-    Article article = articleService.getForPrintArticleById(id);
+    Article article = articleService.getForPrintArticleById(rq.getLoginedMember(), id);
 
     if(article == null) {
       rq.historyBack(Ut.f("%d번 게시물이 존재하지 않습니다.", id));
@@ -145,7 +141,7 @@ public class UsrArticleController extends Controller {
       return;
     }
 
-    Article article = articleService.getForPrintArticleById(id);
+    Article article = articleService.getForPrintArticleById(rq.getLoginedMember(), id);
 
     if(article == null) {
       rq.historyBack(Ut.f("%d번 게시물이 존재하지 않습니다.", id));
@@ -172,7 +168,7 @@ public class UsrArticleController extends Controller {
       return;
     }
 
-    Article article = articleService.getForPrintArticleById(id);
+    Article article = articleService.getForPrintArticleById(rq.getLoginedMember(), id);
 
     if(article == null) {
       rq.historyBack(Ut.f("%d번 게시물이 존재하지 않습니다.", id));

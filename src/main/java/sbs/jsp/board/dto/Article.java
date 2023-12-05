@@ -18,6 +18,8 @@ public class Article {
   private String content;
 
   private String extra__writerName;
+  private boolean extra__actorCanModify;
+  private boolean extra__actorCanDelete;
 
   public Article(Map<String, Object> selectRow) {
     this.id = (int) selectRow.get("id");
