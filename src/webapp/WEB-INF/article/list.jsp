@@ -4,7 +4,13 @@
   <section class="article-list-wrap">
     <div class="con mx-auto w-[1100px]">
       <h1 class="badge badge-neutral my-[10px]">게시물 리스트</h1>
-      <div>
+      <br>
+      <div class="badge badge-primary">
+        <span>전체 게시물 개수 : </span>
+        &nbsp;
+        <span>${totalItemsCount}</span>
+      </div>
+      <div class="mt-[10px]">
         <table class="table text-center">
           <thead>
             <tr class="border-y !border-black">
