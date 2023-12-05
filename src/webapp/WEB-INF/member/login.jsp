@@ -4,12 +4,6 @@
 
 <%@ include file="../part/head.jspf"%>
 
-<style>
-  body, ul, li {
-    margin: 0;
-  }
-</style>
-
 <script>
   function LoginForm_submit(form) {
     let LoginForm__submitDone = false;
@@ -40,6 +34,28 @@
   }
 </script>
 
+<style>
+  .btn-group > button {
+    width: calc(100% / 2 - 7px);
+  }
+
+  .btn-group > .btn-login {
+    background-color : oklch(0.4912 0.3096 275.75) !important;
+  }
+
+  .btn-group > .btn-login:hover {
+    background-color : oklab(0.44208 0.0279164 -0.277238) !important;
+  }
+
+  .btn-group > .btn-cancel {
+    background-color : oklch(0.6971 0.329 342.55) !important;
+  }
+
+  .btn-group > .btn-cancel:hover {
+    background-color : oklab(0.62739 0.282473 -0.0887925) !important;
+  }
+</style>
+
 <section class="member-login-wrap h-screen">
   <div class="con mx-auto w-[1100px] h-full flex items-center justify-center">
     <div class="login-box flex flex-col w-[500px] h-[300px] p-[20px]">
@@ -55,17 +71,8 @@
             <input placeholder="비밀번호" name="loginPw" type="password" class="input input-bordered w-full" />
           </div>
           <div class="btn-group flex justify-center gap-x-3 mt-[10px]">
-            <style>
-              .btn-group > button {
-                width: calc(100% / 2 - 7px);
-              }
-
-              .btn-group > button {
-
-              }
-            </style>
-            <button type="submit" class="btn btn-primary !text-[20px]">로그인</button>
-            <button type="button" class="btn btn-secondary !text-[20px]">
+            <button type="submit" class="btn btn-primary btn-login !text-[20px]">로그인</button>
+            <button type="button" class="btn btn-secondary btn-cancel !text-[20px]">
               <a href="list">취소</a>
             </button>
           </div>
