@@ -19,13 +19,13 @@ public class UsrMemberController extends Controller {
       case "doJoin" -> actionJoin(rq);
       case "login" -> showLogin(rq);
       case "doLogin" -> actionDoLoin(rq);
-      case "logout" -> actionDoLogout(rq);
+      case "doLogout" -> actionDoLogout(rq);
       default -> rq.println("존재하지 않는 페이지 입니다.");
     }
   }
 
   private void actionDoLogout(Rq rq) {
-    rq.removeSessionAttr("loginedMemberId");
+    rq.removeSessionAttr("loginedMember");
     rq.replace("로그아웃 되었습니다.", "../article/list");
   }
 

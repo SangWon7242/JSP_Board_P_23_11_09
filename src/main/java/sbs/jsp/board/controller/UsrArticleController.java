@@ -87,9 +87,7 @@ public class UsrArticleController extends Controller {
       return;
     }
 
-    Member loginedMember = rq.getSessionAttr("loginedMember");
-
-    ResultData writeRd = articleService.write(loginedMember, title, content);
+    ResultData writeRd = articleService.write(rq.getLoginedMember(), title, content);
     int id = (int) writeRd.getBody().get("id");
 
     redirectUri = redirectUri.replace("[NEW_ID]", id + "");
@@ -114,9 +112,7 @@ public class UsrArticleController extends Controller {
       rq.historyBack(Ut.f("%d번 게시물이 존재하지 않습니다.", id));
     }
 
-    Member loginedMember = rq.getSessionAttr("loginedMember");
-
-    ResultData actorCanModifyRd = articleService.actorCanModify(loginedMember, article);
+    ResultData actorCanModifyRd = articleService.actorCanModify(rq.getLoginedMember(), article);
 
     if(actorCanModifyRd.isFail()) {
       rq.historyBack(actorCanModifyRd.getMsg());
@@ -151,9 +147,11 @@ public class UsrArticleController extends Controller {
 
     Article article = articleService.getForPrintArticleById(id);
 
-    Member loginedMember = rq.getSessionAttr("loginedMember");
+    if(article == null) {
+      rq.historyBack(Ut.f("%d번 게시물이 존재하지 않습니다.", id));
+    }
 
-    ResultData actorCanModifyRd = articleService.actorCanModify(loginedMember, article);
+    ResultData actorCanModifyRd = articleService.actorCanModify(rq.getLoginedMember(), article);
 
     if(actorCanModifyRd.isFail()) {
       rq.historyBack(actorCanModifyRd.getMsg());
@@ -176,18 +174,15 @@ public class UsrArticleController extends Controller {
 
     Article article = articleService.getForPrintArticleById(id);
 
+    if(article == null) {
+      rq.historyBack(Ut.f("%d번 게시물이 존재하지 않습니다.", id));
+    }
 
-    Member loginedMember = rq.getSessionAttr("loginedMember");
-
-    ResultData actorCanDeleteRd = articleService.actorCanDelete(loginedMember, article);
+    ResultData actorCanDeleteRd = articleService.actorCanDelete(rq.getLoginedMember(), article);
 
     if(actorCanDeleteRd.isFail()) {
       rq.historyBack(actorCanDeleteRd.getMsg());
       return;
-    }
-
-    if(article == null) {
-      rq.historyBack(Ut.f("%d번 게시물이 존재하지 않습니다.", id));
     }
 
     ResultData deleteRd = articleService.delete(id);

@@ -6,6 +6,7 @@ import sbs.jsp.board.dto.Member;
 public class BeforeActionInterceptor extends Interceptor {
   @Override
   public boolean runBeforeAction(Rq rq) {
+
     if (rq.getSessionAttr("loginedMember") != null) {
       rq.setLogined(true);
       rq.setLoginedMember(rq.getSessionAttr("loginedMember"));
