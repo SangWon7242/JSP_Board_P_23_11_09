@@ -40,22 +40,38 @@
   }
 </script>
 
-
-<div class="member_login_box">
-  <div class="con">
-    <h1>로그인</h1>
-
-    <form action="doLogin" method="POST" onsubmit="LoginForm_submit(this); return false;">
-      <div>로그인 아이디 : <input placeholder="아이디를 입력해주세요." name="loginId" type="text"></div>
-      <div>로그인 패스워드 : <input placeholder="비밀번호를 입력해주세요." name="loginPw" type="password"></div>
-      <div class="btn-group">
-        <button type="submit">로그인</button>
-        <button type="button">
-          <a href="list">취소</a>
-        </button>
+<section class="member-login-wrap h-screen">
+  <div class="con mx-auto w-[1100px] h-full flex items-center justify-center">
+    <div class="login-box flex flex-col w-[500px] h-[300px] p-[20px]">
+      <div class="login-box__head">
+        <div class="login-title text-center text-[2rem] font-bold">
+          로그인
+        </div>
       </div>
-    </form>
-  </div>
-</div>
+      <div class="login-box__body flex items-center justify-center flex-grow">
+        <form class="w-full" action="doLogin" method="POST" onsubmit="LoginForm_submit(this); return false;">
+          <div class="input-box flex flex-col items-center gap-y-3">
+            <input placeholder="아이디" name="loginId" type="text" class="input input-bordered w-full" />
+            <input placeholder="비밀번호" name="loginPw" type="password" class="input input-bordered w-full" />
+          </div>
+          <div class="btn-group flex justify-center gap-x-3 mt-[10px]">
+            <style>
+              .btn-group > button {
+                width: calc(100% / 2 - 7px);
+              }
 
+              .btn-group > button {
+
+              }
+            </style>
+            <button type="submit" class="btn btn-primary !text-[20px]">로그인</button>
+            <button type="button" class="btn btn-secondary !text-[20px]">
+              <a href="list">취소</a>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
 <%@ include file="../part/foot.jspf"%>
